@@ -47,7 +47,7 @@ function getCurrentIpAddress() {
 // Function to send click data to the central server
 function sendDataToServer(data) {
     console.log("Fetch API Called", data);
-    fetch("https://masterprime.site/analytics/trackclicks", {
+    fetch("https://mastersdata.site/analytics/trackclicks", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
