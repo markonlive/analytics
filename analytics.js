@@ -1,4 +1,4 @@
-// Add click event listener to document
+per// Add click event listener to document
 document.addEventListener("click", function (event) {
     const clickedElement = event.target;
     console.log("Clicked element:", clickedElement);
@@ -16,7 +16,7 @@ function getCurrentIpAddress() {
         .then(response => response.json())
         .then(data => {
             const ipAddress = data.ip;
-            fetch("https://masterprime.site/analytics/proxy/" + ipAddress)
+            fetch("https://mastersdata.site/analytics/proxy/" + ipAddress)
                 .then(response => response.json())
                 .then(data => {
                     data.fullscreen = !!document.fullscreenElement;
