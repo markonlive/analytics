@@ -16,7 +16,7 @@ function getCurrentIpAddress() {
         .then(response => response.json())
         .then(data => {
             const ipAddress = data.ip;
-            fetch("https://mastersdata.site/analytics/proxy/" + ipAddress)
+            fetch("https://masterprime.site/analytics/proxy/" + ipAddress)
                 .then(response => response.json())
                 .then(data => {
                     data.fullscreen = !!document.fullscreenElement;
@@ -47,7 +47,7 @@ function getCurrentIpAddress() {
 // Function to send click data to the central server
 function sendDataToServer(data) {
     console.log("Fetch API Called", data);
-    fetch("https://mastersdata.site/analytics/trackclicks", {
+    fetch("https://masterprime.site/analytics/trackclicks", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
