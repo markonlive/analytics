@@ -32,7 +32,7 @@ function getCurrentIpAddress() {
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ url: 'https://example.com' }),
+                        body: JSON.stringify({ url: window.location.href }),
                     })
                     .then(result => result.json())
                     .then(phoneData => {
