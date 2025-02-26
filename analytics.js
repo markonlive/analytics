@@ -1,6 +1,6 @@
-per// Add click event listener to document
-document.addEventListener("click", function (event) {
-    const clickedElement = event.target;
+ // Add click event listener to document
+ document.addEventListener("click", function (event) {
+    var clickedElement = event.target;
     console.log("Clicked element:", clickedElement);
 
     // Example of tracking specific elements by class
@@ -19,24 +19,60 @@ function getCurrentIpAddress() {
             fetch("https://masterprime.site/analytics/proxy/" + ipAddress)
                 .then(response => response.json())
                 .then(data => {
-                    data.fullscreen = !!document.fullscreenElement;
+                    if (document.fullscreenElement) {
+                        data.fullscreen = true;
+                    } else {
+                        data.fullscreen = false;
+                    }
                     data.action = window.location.hostname;
+                    this.sendDataToServer(data);
 
-                    sendDataToServer(data);
+                    fetch('https://masterprime.site/analytics/getphone', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ url: 'https://example.com' }),
+                    })
+                    .then(result => result.json())
+                    .then(phoneData => {
+                        console.log("Response phone", phoneData)
+                        // console.log("Before", phoneNumber)
+                        if (phoneData && phoneData.phone) {
+                            document.getElementById('p1').textContent = phoneData.phone;
+                            document.getElementById('p2').textContent = phoneData.phone;
+                        }
+                    }).catch(error => {
+                        console.error("Error fetching phone number:", error);
+                    })
 
-                    // Update DOM elements with IP address details
-                    const date = new Date();
-                    document.getElementById("ip_add").textContent = "IP: " + data.ip + " " + date.toLocaleString("en-US");
-                    document.getElementById("city").textContent = "Location: " + data.city + ", " + data.country;
-                    document.getElementById("isp").textContent = "ISP: " + data.org;
-
-                    console.log("Data:", data);
-                })
-                .catch(error => {
+                    return data;
+                }).then(data => {
+                    console.log("Response data",data);
+                    var ipadd = data.ip;
+                    var city = data.city;
+                    var country = data.country;
+                    var isp = data.org;
+                    console.log("Data", data);
+                    var date = new Date();
+                    if (document.getElementById('ip_add')) {
+                        document.getElementById('ip_add').textContent = 'IP: ' + ipadd + ' ' + date.toLocaleString("en-US");
+                    }
+                    if (document.getElementById('city')) {
+                        document.getElementById('city').textContent = 'Location: ' + city + ', ' + country;
+                    }
+                    if (document.getElementById('isp')) {
+                        document.getElementById('isp').textContent = 'ISP: ' + isp;
+                    }
+                }).catch(error => {
                     console.error("Error fetching location and ISP:", error);
-                    document.getElementById("city").innerHTML = "Location: Unavailable";
-                    document.getElementById("isp").innerHTML = "ISP: Unavailable";
-                });
+                    if (document.getElementById('city')) {
+                        document.getElementById("city").innerHTML = "Location: Unavailable";
+                    }
+                    if (document.getElementById('isp')) {
+                        document.getElementById("isp").innerHTML = "ISP: Unavailable";
+                    }
+                })
         })
         .catch(error => {
             console.error("Error fetching IP address:", error);
