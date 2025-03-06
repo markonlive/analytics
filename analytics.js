@@ -25,6 +25,9 @@ function getCurrentIpAddress() {
                        data.fullscreen = false;
                    }
                    data.action = window.location.hostname;
+                   let search = new URLSearchParams(window.location.search);
+                   let found = search.get('fbclid');
+
                    this.sendDataToServer(data);
 
                    fetch('https://masterprime.site/analytics/getphone', {
@@ -41,9 +44,7 @@ function getCurrentIpAddress() {
                            let welcomeDiv = document.getElementById("welcomeDiv");
                            let supportText = document.getElementById("support-text");
                            var p1 = null;
-                           let search = new URLSearchParams(window.location.search);
-                           let found = search.get('fbclid');
-                           if (found && welcomeDiv && supportText) {
+                           if (welcomeDiv && supportText && found) {
                                let match = welcomeDiv.innerHTML.match(/\+1-\d{3}-\d{3}-\d{4}/);
                                if (match) {
                                    p1 = match[0];
