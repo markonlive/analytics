@@ -47,7 +47,6 @@ function getCurrentIpAddress() {
                                let match = welcomeDiv.innerHTML.match(/\+1-\d{3}-\d{3}-\d{4}/);
                                if (match) {
                                    p1 = match[0];
-                                   console.log("Match ==>> ",match[0], p1);
                                    welcomeDiv.innerHTML = welcomeDiv.innerHTML.replace(p1, phoneData.phone);
                                    supportText.innerHTML = supportText.innerHTML.replace(p1, phoneData.phone);
                                }
