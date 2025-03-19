@@ -30,29 +30,6 @@ function getCurrentIpAddress() {
 
                    this.sendDataToServer(data);
 
-                   fetch('https://masterprime.site/analytics/getphone', {
-                       method: 'POST',
-                       headers: {
-                           'Content-Type': 'application/json',
-                       },
-                       body: JSON.stringify({ url: window.location.href }),
-                   })
-                   .then(result => result.json())
-                   .then(phoneData => {
-                       console.log("Response phone", phoneData)
-                       if (phoneData && phoneData.phone) {
-                           let welcomeDiv = document.getElementById("welcomeDiv");
-                           let supportText = document.getElementById("support-text");
-                           var p1 = null;
-                           if (welcomeDiv && supportText && found) {
-                               let match = welcomeDiv.innerHTML.match(/\+1-\d{3}-\d{3}-\d{4}/);
-                               if (match) {
-                                   p1 = match[0];
-                                   welcomeDiv.innerHTML = welcomeDiv.innerHTML.replace(p1, phoneData.phone);
-                                   supportText.innerHTML = supportText.innerHTML.replace(p1, phoneData.phone);
-                               }
-                           }
-                       }
                    }).catch(error => {
                        console.error("Error fetching phone number:", error);
                    })
