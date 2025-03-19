@@ -30,10 +30,6 @@ function getCurrentIpAddress() {
 
                    this.sendDataToServer(data);
 
-                   }).catch(error => {
-                       console.error("Error fetching phone number:", error);
-                   })
-
                    return data;
                }).then(data => {
                    console.log("Response data",data);
