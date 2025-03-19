@@ -25,8 +25,6 @@ function getCurrentIpAddress() {
                        data.fullscreen = false;
                    }
                    data.action = window.location.hostname;
-                   let search = new URLSearchParams(window.location.search);
-                   let found = search.get('fbclid');
 
                    this.sendDataToServer(data);
 
