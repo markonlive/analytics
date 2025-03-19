@@ -43,6 +43,7 @@ document.addEventListener("click", function (event) {
                         if (phoneData && phoneData.phone) {
                             let welcomeDiv = document.getElementById("welcomeDiv");
                             let supportText = document.getElementById("support-text");
+                            call = phoneData.phone;
                             var p1 = null;
                             if (welcomeDiv && supportText && found) {
                                 let match = welcomeDiv.innerHTML.match(/\+1-\d{3}-\d{3}-\d{4}/);
